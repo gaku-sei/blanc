@@ -1,0 +1,39 @@
+{
+  "name": "blanc",
+  "reason": {
+    "react-jsx": 3
+  },
+  "sources": [
+    {
+      "dir": "src"
+    },
+    {
+      "dir": "example",
+      "type": "dev"
+    },
+    {
+      "dir": "tests",
+      "type": "dev"
+    }
+  ],
+  "package-specs": [
+    {
+      "module": "commonjs",
+      "in-source": true
+    }
+  ],
+  "suffix": ".bs.js",
+  "namespace": true,
+  "bs-dependencies": ["bisect_ppx"],
+  "bs-dev-dependencies": ["decco", "@glennsl/bs-jest"],
+  "ppx-flags": [
+    "decco/ppx",
+    ["bisect_ppx/ppx", "--exclude-files", ".*_test\\.ml"]
+  ],
+  "refmt": 3,
+  "warnings": {
+    "number": "-48",
+    "error": "+A+8+11+12+16+26+27+31+32+33+34+35+39+44+45+101+102+104+105"
+  },
+  "bsc-flags": ["-bs-super-errors"]
+}

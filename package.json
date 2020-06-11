@@ -1,0 +1,30 @@
+{
+  "name": "blanc",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "bsb -make-world",
+    "clean": "bsb -clean-world",
+    "test": "yarn clean && BISECT_ENABLE=yes yarn build && jest",
+    "test:coverage": "rimraf *.coverage && rimraf _coverage && yarn test && bisect-ppx-report html && serve _coverage",
+    "example:start": "yarn build && node example/Main.bs.js"
+  },
+  "jest": {
+    "setupFilesAfterEnv": [
+      "bisect_ppx/src/runtime/bucklescript/jest.js"
+    ],
+    "testMatch": [
+      "**/example/**/*_test.bs.js",
+      "**/tests/**/*_test.bs.js"
+    ]
+  },
+  "devDependencies": {
+    "@glennsl/bs-jest": "^0.5.1",
+    "bisect_ppx": "^2.4.1",
+    "bs-platform": "^7.3.2",
+    "decco": "^1.2.1",
+    "rimraf": "^3.0.2",
+    "serve": "^11.3.2"
+  }
+}

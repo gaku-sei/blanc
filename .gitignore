@@ -1,0 +1,8 @@
+**/*.bs.js
+lib
+node_modules
+.vscode
+.bsb.lock
+.merlin
+**/*.coverage
+_coverage
