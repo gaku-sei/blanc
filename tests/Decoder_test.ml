@@ -266,4 +266,25 @@ let () =
                 ] (fun input ->
                   match input --> (right <|> left) with
                   | Ok _ -> fail "got a oneOf"
-                  | Error _ -> pass))))
+                  | Error _ -> pass)));
+
+      describe "Helpers" (fun () ->
+          describe "fromOption" (fun () ->
+              testAll "successfully convert an option into a decoder"
+                [ (Some "foo", Ok "foo"); (None, Error "invalid value") ]
+                (fun (option, expected) ->
+                  expect ("0" --> fromOption option) = expected);
+
+              testAll
+                "successfully convert an option into a decoder, with a custom \
+                 error"
+                [
+                  (Some "foo", "error", Ok "foo"); (None, "error", Error "error");
+                ] (fun (option, error, expected) ->
+                  expect ("0" --> fromOption ~error option) = expected));
+
+          describe "fromResult" (fun () ->
+              testAll "successfully convert an option into a decoder"
+                [ (Ok "foo", Ok "foo"); (Error "failed", Error "failed") ]
+                (fun (result, expected) ->
+                  expect ("0" --> fromResult result) = expected))))
