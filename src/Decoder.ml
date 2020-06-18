@@ -87,6 +87,16 @@ let alt decoder1 decoder2 json =
 
 let ( <|> ) = alt
 
+(* Helpers *)
+
+let fromOption ?(error = "invalid value") = function
+  | Some value -> pure value
+  | None -> throwError error
+
+let fromResult = function
+  | Ok value -> pure value
+  | Error error -> throwError error
+
 (* Decode string helpers *)
 
 let decodeString string decoder =
